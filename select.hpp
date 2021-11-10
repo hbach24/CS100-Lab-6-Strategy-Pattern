@@ -2,7 +2,7 @@
 #define __SELECT_HPP__
 
 #include <cstring>
-#include "spreadsheet.hpp"
+//#include "spreadsheet.hpp"
 
 class Select
 {
