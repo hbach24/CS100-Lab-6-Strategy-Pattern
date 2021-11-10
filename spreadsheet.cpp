@@ -28,10 +28,11 @@ void Spreadsheet::print_selection(std::ostream& out) const{
 
 	}
 	for(int i = 0; i<data.size(); ++i){
-		if(this->select->select(this, i)){
+		if(select->select(this, i)){
 			for(int j = 0; j<data[i].size(); ++j){
 				out<<data[i][j]<< " ";
 			}
+			out<< std::endl;
 		}
 	}
 }
