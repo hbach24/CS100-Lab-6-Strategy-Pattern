@@ -46,7 +46,7 @@ public:
 	Select_Contains(const Spreadsheet* sheet, const std::string& name, const std::string& keyword): Select_Column(sheet, name){
 		substr = keyword;
 	}
-	virtual bool select(const std::string& s){
+	virtual bool select(const std::string& s) const{
 		if(s.find(substr) != std::string::npos){
 			return true;
 		}

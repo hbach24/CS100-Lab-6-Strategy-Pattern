@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iostream>
 
+
 Spreadsheet::~Spreadsheet()
 {
     delete select;
@@ -13,6 +14,26 @@ void Spreadsheet::set_selection(Select* new_select)
 {
     delete select;
     select = new_select;
+}
+
+void Spreadsheet::print_selection(std::ostream& out) const{
+	if (select == nullptr){
+		for(int i = 0; i<data.size(); ++i){
+                        for(int j = 0; j<data[i].size(); ++j){
+                                out<<data[i][j]<< " ";
+                        }
+			out<<std::endl;
+        	}
+		return;
+
+	}
+	for(int i = 0; i<data.size(); ++i){
+		if(this->select->select(this, i)){
+			for(int j = 0; j<data[i].size(); ++j){
+				out<<data[i][j]<< " ";
+			}
+		}
+	}
 }
 
 void Spreadsheet::clear()
