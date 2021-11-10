@@ -2,6 +2,7 @@
 #define __SELECT_HPP__
 
 #include <cstring>
+#include "spreadsheet.hpp"
 
 class Select
 {
@@ -40,16 +41,16 @@ public:
 
 class Select_Contains: public Select_Column{
 private:
-	string substr;
+	std::string substr;
 public:
 	Select_Contains(const Spreadsheet* sheet, const std::string& name, const std::string& keyword): Select_Column(sheet, name){
 		substr = keyword;
 	}
-	bool select(const std::string& s){
+	virtual bool select(const std::string& s){
 		if(s.find(substr) != std::string::npos){
 			return true;
 		}
 		return false;	
 	}
-}
+};
 #endif //__SELECT_HPP__
