@@ -54,6 +54,7 @@ public:
 	}
 };
 
+
 class Select_Not: public Select{
 private:
 	Select* s;
@@ -66,6 +67,55 @@ public:
 			return false;
 		}
 		return true;
+	}
+};
+
+class Select_And : public Select 
+{
+private:
+	Select* s1;
+	Select* s2;
+
+public:
+	Select_And(Select* a, Select* b) {
+		s1 = a; s2 = b;
+	}
+	
+	virtual bool select(const Spreadsheet* sheet, int row) const {
+		if((s1->select(sheet, row)) && (s2->select(sheet, row))) {
+			return true;
+		}
+		return false;
+	}
+
+	 ~Select_And() {
+		delete s1;
+		delete s2;
+	}
+};
+
+
+class Select_Or : public Select {
+private:
+        Select* s1;
+        Select* s2;
+
+public:
+	Select_Or(Select* a, Select* b) {
+		s1 = a; s2 = b; 
+	}
+	
+	virtual bool select(const Spreadsheet* sheet, int row) const {
+		if((s1->select(sheet,row)) || (s2->select(sheet,row))) {
+			return true;
+		}
+		return false;
+	}
+
+	~Select_Or() {
+		delete s1;
+		delete s2;
+
 	}
 };
 
