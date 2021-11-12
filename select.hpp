@@ -54,6 +54,22 @@ public:
 	}
 };
 
+
+class Select_Not: public Select{
+private:
+	Select* s;
+public:
+	Select_Not(Select* a){
+		s = a;
+	}
+	bool select(const Spreadsheet* sheet, int row) const{
+		if(s->select(sheet, row)){
+			return false;
+		}
+		return true;
+	}
+};
+
 class Select_And : public Select 
 {
 private:
@@ -99,6 +115,7 @@ public:
 	~Select_Or() {
 		delete s1;
 		delete s2;
+
 	}
 };
 

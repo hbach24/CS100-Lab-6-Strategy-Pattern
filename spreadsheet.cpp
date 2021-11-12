@@ -26,6 +26,7 @@ void Spreadsheet::print_selection(std::ostream& out) const{
         	}
 		return;
 	}
+	
 	for(int i = 0; i<data.size(); ++i){
 		if(select->select(this, i)){
 			for(int j = 0; j<data[i].size(); ++j){
@@ -34,6 +35,7 @@ void Spreadsheet::print_selection(std::ostream& out) const{
 			out<< std::endl;
 		}
 	}
+	
 }
 
 void Spreadsheet::clear()
