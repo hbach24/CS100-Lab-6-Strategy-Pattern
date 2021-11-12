@@ -142,22 +142,6 @@ TEST(Select_Contains, OneLetter) {
 
 }
 
-TEST(Select_Contains, NonExistingColumn) {
-        std::stringstream s;
-
-        Spreadsheet sheet;
-
-        sheet.set_column_names({"fruit"});
-        sheet.add_row({"apple"});
-        sheet.add_row({"grapes"});
-        sheet.add_row({"peach"});
-
-        sheet.set_selection(new Select_Contains(&sheet, "food", "apple"));
-        sheet.print_selection(s);
-        EXPECT_EQ("\n", s.str());
-
-}
-
 TEST(Select_Contains, TwoColumnWithSameName) {
         std::stringstream s;
 
