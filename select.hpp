@@ -77,4 +77,29 @@ public:
 		delete s2;
 	}
 };
+
+
+class Select_Or : public Select {
+private:
+        Select* s1;
+        Select* s2;
+
+public:
+	Select_Or(Select* a, Select* b) {
+		s1 = a; s2 = b; 
+	}
+	
+	virtual bool select(const Spreadsheet* sheet, int row) const {
+		if((s1->select(sheet,row)) || (s2->select(sheet,row))) {
+			return true;
+		}
+		return false;
+	}
+
+	~Select_Or() {
+		delete s1;
+		delete s2;
+	}
+};
+
 #endif //__SELECT_HPP__
