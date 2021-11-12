@@ -108,6 +108,7 @@ TEST(Select_And, Case) {
 	EXPECT_EQ("", s.str()); //expect an empty string since "KI" doesn't exist
 }
 
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
