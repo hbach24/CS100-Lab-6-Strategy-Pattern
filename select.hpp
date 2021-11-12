@@ -53,4 +53,20 @@ public:
 		return false;	
 	}
 };
+
+class Select_Not: public Select{
+private:
+	Select* s;
+public:
+	Select_Not(Select* a){
+		s = a;
+	}
+	bool select(const Spreadsheet* sheet, int row) const{
+		if(s->select(sheet, row)){
+			return false;
+		}
+		return true;
+	}
+};
+
 #endif //__SELECT_HPP__

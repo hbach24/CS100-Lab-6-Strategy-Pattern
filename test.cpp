@@ -3,7 +3,7 @@
 #include "gtest/gtest.h"
 #include "select.hpp"
 
-TEST(Select_Contains, ReturnTrue) {
+TEST(Select_Contains, FoundOne) {
 	std::stringstream s;
 	
 	Spreadsheet sheet;
@@ -82,6 +82,72 @@ TEST(Select_Contains, TwoColumnWithSameName) {
         EXPECT_EQ("grapes orange \n", s.str());
 
 }
+
+TEST(Select_Not, FoundTwo) {
+        std::stringstream s;
+
+        Spreadsheet sheet;
+
+        sheet.set_column_names({"fruit"});
+        sheet.add_row({"apple"});
+        sheet.add_row({"grapes"});
+        sheet.add_row({"peach"});
+
+        sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "fruit", "apple")));
+        sheet.print_selection(s);
+        EXPECT_EQ("grapes \npeach \n", s.str());
+
+}
+
+TEST(Select_Not, EmptyString) {
+        std::stringstream s;
+
+        Spreadsheet sheet;
+
+        sheet.set_column_names({"fruit"});
+        sheet.add_row({"apple"});
+        sheet.add_row({"grapes"});
+        sheet.add_row({"peach"});
+
+        sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "fruit", "")));
+        sheet.print_selection(s);
+        EXPECT_EQ("", s.str());
+
+}
+
+TEST(Select_Not, OneLetter) {
+        std::stringstream s;
+
+        Spreadsheet sheet;
+
+        sheet.set_column_names({"fruit"});
+        sheet.add_row({"apple"});
+        sheet.add_row({"grapes"});
+        sheet.add_row({"orange"});
+
+        sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "fruit", "g")));
+        sheet.print_selection(s);
+        EXPECT_EQ("apple \n", s.str());
+
+}
+
+TEST(Select_Not, ReturnTrue) {
+        std::stringstream s;
+
+        Spreadsheet sheet;
+
+        sheet.set_column_names({"fruit", "fruit"});
+        sheet.add_row({"apple", "dragon fruit"});
+        sheet.add_row({"grapes", "orange"});
+        sheet.add_row({"peach", "avocado"});
+
+        sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "fruit", "apple")));
+        sheet.print_selection(s);
+        EXPECT_EQ("grapes orange \npeach avocado \n", s.str());
+
+}
+
+
 
 
 
