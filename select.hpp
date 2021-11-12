@@ -62,6 +62,9 @@ public:
 	Select_Not(Select* a){
 		s = a;
 	}
+	~Select_Not(){
+		delete s;
+	}
 	bool select(const Spreadsheet* sheet, int row) const{
 		if(s->select(sheet, row)){
 			return false;
