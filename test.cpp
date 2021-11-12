@@ -79,6 +79,7 @@ TEST(Select_Or, None) {
         EXPECT_EQ("", s.str()); //empty string b/c "orange" and "do" do not exist in our sheet
 }
 
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
